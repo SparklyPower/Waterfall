@@ -1,0 +1,32 @@
+From fa5535fc82fcb2f63f24d8c0adab87ffbfd8cdfe Mon Sep 17 00:00:00 2001
+From: MrPowerGamerBR <git@mrpowergamerbr.com>
+Date: Sun, 11 Jun 2023 11:51:14 -0300
+Subject: [PATCH] Remove invalid name check
+
+
+diff --git a/proxy/src/main/java/net/md_5/bungee/connection/InitialHandler.java b/proxy/src/main/java/net/md_5/bungee/connection/InitialHandler.java
+index 98b78de2..96175850 100644
+--- a/proxy/src/main/java/net/md_5/bungee/connection/InitialHandler.java
++++ b/proxy/src/main/java/net/md_5/bungee/connection/InitialHandler.java
+@@ -399,11 +399,13 @@ public class InitialHandler extends PacketHandler implements PendingConnection
+     {
+         Preconditions.checkState( thisState == State.USERNAME, "Not expecting USERNAME" );
+ 
+-        if ( !AllowedCharacters.isValidName( loginRequest.getData(), onlineMode ) )
+-        {
+-            disconnect( bungee.getTranslation( "name_invalid" ) );
+-            return;
+-        }
++        // SparklyBungee start - We need to disable this due to Geyser
++        // if ( !AllowedCharacters.isValidName( loginRequest.getData(), onlineMode ) )
++        // {
++        //     disconnect( bungee.getTranslation( "name_invalid" ) );
++        //     return;
++        // }
++        // SparklyBungee end
+ 
+         if ( BungeeCord.getInstance().config.isEnforceSecureProfile() && getVersion() < ProtocolConstants.MINECRAFT_1_19_3 )
+         {
+-- 
+2.34.1
+
